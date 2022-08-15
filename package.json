@@ -12,10 +12,8 @@
   },
   "description": "To and from Markdown and Quill delta",
   "devDependencies": {
-    "eslint": "3.8.1",
-    "eslint-plugin-node": "2.1.3",
-    "jest": "^21.0.1",
-    "prettier": "^1.5.2",
+    "eslint": "^8.22.0",
+    "jest": "^28.1.3",
     "webpack": "^3.10.0"
   },
   "directories": {},
@@ -30,10 +28,10 @@
   "public": true,
   "readme": "ERROR: No README data found!",
   "scripts": {
-    "pretty": "find ./**/*.js | xargs prettier --write --no-semi --print-width 80 --single-quote --trailing-comma es5",
+    "lint": "npx eslint .",
     "build": "webpack",
     "test": "jest",
-    "test:watch": "mocha \"tests/**/*.spec.js\" --reporter progress --watch"
+    "test:watch": "jest \"tests/**/*.spec.js\" --watch"
   },
   "version": "0.0.1"
 }

@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unpublished-require */
 var path = require("path");
 var webpack = require("webpack");
 module.exports = {
