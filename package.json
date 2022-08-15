@@ -15,7 +15,8 @@
     "eslint": "3.8.1",
     "eslint-plugin-node": "2.1.3",
     "jest": "^21.0.1",
-    "prettier": "^1.5.2"
+    "prettier": "^1.5.2",
+    "webpack": "^3.10.0"
   },
   "directories": {},
   "keywords": [
@@ -26,11 +27,11 @@
   "license": "ISC",
   "main": "index.js",
   "name": "delta-markdown-for-quill",
-  "optionalDependencies": {},
   "public": true,
   "readme": "ERROR: No README data found!",
   "scripts": {
     "pretty": "find ./**/*.js | xargs prettier --write --no-semi --print-width 80 --single-quote --trailing-comma es5",
+    "build": "webpack",
     "test": "jest",
     "test:watch": "mocha \"tests/**/*.spec.js\" --reporter progress --watch"
   },

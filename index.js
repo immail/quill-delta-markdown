@@ -1,4 +1,9 @@
-module.exports = {
-  fromDelta: require('./src/fromDelta'),
-  toDelta: require('./src/toDelta'),
+const fromDelta = require('./src/fromDelta');
+const toDelta = require('./src/toDelta');
+
+const quillDeltaMarkdown = {
+  fromDelta,
+  toDelta
 }
+
+module.exports = quillDeltaMarkdown;

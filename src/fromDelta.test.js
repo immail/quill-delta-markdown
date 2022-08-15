@@ -1,6 +1,6 @@
 const render = require('./fromDelta')
 
-test('renders inline format', function() {
+test.only('renders inline format', function() {
   expect(
     render([
       {
