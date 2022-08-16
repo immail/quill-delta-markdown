@@ -10,7 +10,7 @@ module.exports = {
 
   inline: {
     italic: function() {
-      return ['*', '*']
+      return ['_', '_']
     },
     bold: function() {
       return ['**', '**']

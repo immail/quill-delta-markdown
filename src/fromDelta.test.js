@@ -1,6 +1,6 @@
 const render = require('./fromDelta')
 
-test.only('renders inline format', function() {
+test('renders inline format', function() {
   expect(
     render([
       {
@@ -124,7 +124,7 @@ test('renders lists with inline formats correctly', function() {
       },
     ])
   ).toEqual(
-    '1. *Glenn v. Brumby*, 663 F.3d 1312 (11th Cir. 2011)\n2. *Barnes v. City of Cincinnati*, 401 F.3d 729 (6th Cir. 2005)\n'
+    '1. _Glenn v. Brumby_, 663 F.3d 1312 (11th Cir. 2011)\n2. _Barnes v. City of Cincinnati_, 401 F.3d 729 (6th Cir. 2005)\n'
   )
 })
 
@@ -225,7 +225,7 @@ test('renders adjacent inline formats correctly', function() {
       },
     ])
   ).toEqual(
-    '*Italics! [Italic link](http://example.com)*[ regular link](http://example.com)' +
+    '_Italics! [Italic link](http://example.com)_[ regular link](http://example.com)' +
       '\n'
   )
 })

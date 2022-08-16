@@ -74,7 +74,7 @@ function convert(ops, converters) {
           }
           applyStyles(op.attributes, ops[i + 1] && ops[i + 1].attributes)
           el.append(lines[l])
-          if (l < lines.length) {
+          if (l < lines.length - 1) {
             newLine()
           }
         }

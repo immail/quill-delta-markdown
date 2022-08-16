@@ -18264,7 +18264,7 @@ function convert(ops, converters) {
           }
           applyStyles(op.attributes, ops[i + 1] && ops[i + 1].attributes)
           el.append(lines[l])
-          if (l < lines.length) {
+          if (l < lines.length - 1) {
             newLine()
           }
         }
@@ -18337,7 +18337,6 @@ function isLinifyable(attrs, converters) {
   return false
 }
 
-
 /***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18354,7 +18353,7 @@ module.exports = {
 
   inline: {
     italic: function() {
-      return ['*', '*']
+      return ['_', '_']
     },
     bold: function() {
       return ['**', '**']
@@ -18424,7 +18423,6 @@ module.exports = {
   },
 }
 
-
 /***/ }),
 /* 24 */
 /***/ (function(module, exports) {
@@ -18491,7 +18489,6 @@ toDelta.commonmark = new commonmark.Parser()
 toDelta.converters = converters
 
 module.exports = toDelta
-
 
 /***/ }),
 /* 26 */
