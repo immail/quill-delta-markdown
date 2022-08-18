@@ -1,34 +1,20 @@
-var path = require("path");
-var webpack = require("webpack");
+var path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
+
 module.exports = {
-  entry: {
-    "quillDeltaMarkdown": "./index.js"
-  },
+  entry: './index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'quillDeltaMarkdown.js',
     libraryTarget: 'umd',
     library: 'quillDeltaMarkdown'
-  },
-  module: {
-    // loaders: [
-    //   {
-    //     test: /\.js$/,
-    //     loader: 'babel-loader',
-    //     query: {
-    //         presets: ['es2015']
-    //     }
-    //   }
-    // ]
   },
   stats: {
     colors: true
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/,
-      minimize: true
-    })
-  ],
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   devtool: 'source-map'
 }
