@@ -1,9 +1,7 @@
 {
-  "_inCache": true,
-  "_installable": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/disyakidneyshot/quill-delta-markdown"
+    "url": "https://github.com/immail/quill-delta-markdown"
   },
   "dependencies": {
     "commonmark": "^0.26.0",
@@ -23,7 +21,7 @@
     "quill"
   ],
   "license": "ISC",
-  "main": "index.js",
+  "main": "dist/quillDeltaMarkdown.js",
   "name": "delta-markdown-for-quill",
   "public": true,
   "readme": "ERROR: No README data found!",
