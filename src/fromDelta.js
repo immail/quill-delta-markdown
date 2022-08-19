@@ -3,6 +3,8 @@ const defaultConverters = require('./fromDelta.converters')
 const Node = require('./utils/Node')
 
 exports = module.exports = function(ops, converters = defaultConverters) {
+  const debug = convert(ops, converters).render();
+  console.log({debug});
   return _.trimEnd(convert(ops, converters).render()) + '\n'
 }
 

@@ -12,6 +12,9 @@ test('renders inline format', function() {
         },
         insert: 'mom',
       },
+      {
+        insert: '\n',
+      }
     ])
   ).toEqual('Hi **mom**\n')
 })
@@ -87,6 +90,33 @@ test('renders block format', function() {
       },
     ])
   ).toEqual('# Headline\n')
+})
+
+test.only('renders ordered list correctly', function() {
+  expect(
+    render([
+      {
+        insert: 'Item 1',
+      },
+      {
+        attributes: {
+          type: 'ordered-list-item',
+        },
+        insert: '\n',
+      },
+      {
+        insert: 'Item 2',
+      },
+      {
+        attributes: {
+          type: 'ordered-list-item',
+        },
+        insert: '\n',
+      },
+    ])
+  ).toEqual(
+    '1. Item 1\n2. Item 2\n'
+  )
 })
 
 test('renders lists with inline formats correctly', function() {
