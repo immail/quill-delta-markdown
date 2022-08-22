@@ -33,12 +33,12 @@ module.exports = {
   },
 
   block: {
-    header: function({header}) {
-      this.open = '#'.repeat(header) + ' ' + this.open;
-    },
-    blockquote: function() {
-      this.open = '> ' + this.open;
-    },
+    // header: function({header}) {
+    //   this.open = '#'.repeat(header) + ' ' + this.open;
+    // },
+    // blockquote: function() {
+    //   this.open = '> ' + this.open;
+    // },
     'code-block': function () {
       this.open = '```' + this.open;
     },
