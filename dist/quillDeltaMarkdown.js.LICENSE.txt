@@ -1,5 +1,12 @@
 /* commonmark 0.30.0 https://github.com/commonmark/commonmark.js @license BSD3 */
 
+/*!
+ * isobject <https://github.com/jonschlinkert/isobject>
+ *
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
 /*! http://mths.be/repeat v0.2.0 by @mathias */
 
 /**

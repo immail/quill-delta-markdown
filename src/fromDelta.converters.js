@@ -1,81 +1,83 @@
-const Node = require('./utils/Node')
-const { encodeLink } = require('./utils/URL')
+const Node = require('./utils/Node');
+const { encodeLink } = require('./utils/URL');
 
 module.exports = {
   embed: {
     image: function(src) {
-      this.append('![](' + encodeLink(src) + ')')
+      this.append('![](' + encodeLink(src) + ')');
+    },
+    // Not a default Quill feature, converts custom divider embed blot added when
+    // creating quill editor instance.
+    // See https://quilljs.com/guides/cloning-medium-with-parchment/#dividers
+    thematic_break: function() {
+      this.open = '\n---\n' + this.open;
     },
   },
 
   inline: {
     italic: function() {
-      return ['_', '_']
+      return ['_', '_'];
     },
     bold: function() {
-      return ['**', '**']
+      return ['**', '**'];
     },
-    code: function() {
-      return ['`', '`']
+    link: function(url) {
+      return ['[', '](' + url + ')'];
     },
-    underline: function() {
-      return ['__', '__']
+    code: function () {
+      return ["`", "`"];
     },
-    strikethrough: function() {
-      return ['~~', '~~']
-    },
-    entity: function(attributes) {
-      switch (attributes.type) {
-        case 'LINK':
-          return [`[`, `](${attributes.data.url})`]
-        default:
-          return ['', '']
-      }
+    strike: function () {
+      return ["~~", "~~"];
     },
   },
 
   block: {
-    'header-one': function() {
-      this.open = '# ' + this.open
-    },
-    'header-two': function() {
-      this.open = '## ' + this.open
+    header: function({header}) {
+      this.open = '#'.repeat(header) + ' ' + this.open;
     },
     blockquote: function() {
-      this.open = '> ' + this.open
+      this.open = '> ' + this.open;
     },
-    'code-block': function() {
-      this.open = '```\n' + this.open
-      this.close = this.close + '```\n'
+    'code-block': function () {
+      this.open = '```' + this.open;
     },
-    'todo-block': function({ data }) {
-      this.open = (data.checked ? '- [x] ' : '- [ ] ') + this.open
+    align: function() {
+      if (this.children && this.children.length &&
+            this.children[0].text &&
+            this.children[0].text.startsWith('$') &&
+            this.children[0].text.endsWith('$')) {
+        this.open = '$' + this.open;
+        this.close = '$' + this.close;
+      }
     },
-    'unordered-list-item': {
+    list: {
       group: function() {
-        return new Node(['', '\n'])
+        return new Node(['', '\n']);
       },
-      line: function(attrs) {
-        const indent = attrs.data && attrs.data.depth ? '  '.repeat(attrs.data.depth) : ''
-        this.open = indent + '- ' + this.open
+      line: function (attrs, group) {
+        let indent = "";
+
+        if (attrs.indent) {
+          indent = "    ".repeat(attrs.indent);
+          group.indent = attrs.indent;
+        } else {
+          group.indent = 0;
+        }
+
+        if (attrs.list === "bullet") {
+          this.open = indent + "- " + this.open;
+        } else if (attrs.list === "checked") {
+          this.open = indent + "- [x] " + this.open;
+        } else if (attrs.list === "unchecked") {
+          this.open = indent + "- [ ] " + this.open;
+        } else if (attrs.list === "ordered") {
+          group.indentCounts[attrs.indent] =
+            group.indentCounts[attrs.indent] || 0;
+          let count = ++group.indentCounts[attrs.indent];
+          this.open = indent + count + ". " + this.open;
+        }
       },
-    },
-    'ordered-list-item': {
-      group: function() {
-        return new Node(['', '\n'])
-      },
-      line: function(attrs, group) {
-        const indent = attrs.data && attrs.data.depth ? '  '.repeat(attrs.data.depth) : ''
-        group.count = group.count || 0
-        var count = ++group.count
-        this.open = indent + count + '. ' + this.open
-      },
-    },
-    separator: function() {
-      this.open = '\n---\n' + this.open
-    },
-    image: function({ data }) {
-      this.open = `![](${encodeLink(data.url)})`
-    },
+    }
   },
 }
