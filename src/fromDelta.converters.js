@@ -9,9 +9,9 @@ module.exports = {
     // Not a default Quill feature, converts custom divider embed blot added when
     // creating quill editor instance.
     // See https://quilljs.com/guides/cloning-medium-with-parchment/#dividers
-    thematic_break: function() {
-      this.open = '\n---\n' + this.open;
-    },
+    // thematic_break: function() {
+    //   this.open = '\n---\n' + this.open;
+    // },
   },
 
   inline: {
@@ -39,8 +39,22 @@ module.exports = {
     // blockquote: function() {
     //   this.open = '> ' + this.open;
     // },
-    'code-block': function () {
-      this.open = '```' + this.open;
+    'code-block': {
+      group: function() {
+        return new Node(['```', '```']);
+      },
+      line: function (attrs, group) {
+        let indent = "";
+        group.indent = 0;
+        const nodes = group.el.children;
+        if(nodes.length >=2) {
+          const node = nodes.slice(-2)[0];
+          if(node.open === '\n' && node.close === '\n') {
+            node.close = '';
+          }
+        }
+        this.open = indent + this.close;
+      }
     },
     align: function() {
       if (this.children && this.children.length &&
