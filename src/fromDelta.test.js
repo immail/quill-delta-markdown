@@ -293,7 +293,11 @@ test('render an inline code', function() {
 })
 
 test('render a code-block', function() {
-  const resultRender = render([{"attributes":{"bold":true},"insert":"Strong"},{"insert":"\ncodeLine1"},{"attributes":{"code-block":true},"insert":"\n"},{"insert":"codeLine2"},{"attributes":{"code-block":true},"insert":"\n"},{"insert":"Simple text\n"}]);
+  const resultRender = render([{"attributes":{"bold":true},"insert":"Strong"},
+    {"insert":"\ncodeLine1"},{"attributes":{"code-block":true},"insert":"\n"},
+    {"insert":"codeLine2"},{"attributes":{"code-block":true},"insert":"\n"},
+    {"insert":"Simple text\n"}
+  ]);
   expect(resultRender)
   .toEqual("**Strong**\n```\ncodeLine1\ncodeLine2\n```Simple text\n");
 })
