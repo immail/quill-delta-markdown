@@ -111,41 +111,42 @@ test('renders lists with inline formats correctly', function() {
 })
 
 test("renders lists with inline strike correctly", function () {
-  expect(
-    render([
-      {
-        attributes: {
-          strike: true,
-        },
-        insert: "Glenn v. Brumby",
+  const resultRender = render([
+    {
+      attributes: {
+        strike: true,
       },
-      {
-        insert: ", 663 F.3d 1312 (11th Cir. 2011)",
+      insert: "Glenn v. Brumby",
+    },
+    {
+      insert: ", 663 F.3d 1312 (11th Cir. 2011)",
+    },
+    {
+      attributes: {
+        list: "ordered",
       },
-      {
-        attributes: {
-          list: "ordered",
-        },
-        insert: "\n",
+      insert: "\n",
+    },
+    {
+      attributes: {
+        strike: true,
       },
-      {
-        attributes: {
-          strike: true,
-        },
-        insert: "Barnes v. City of Cincinnati",
+      insert: "Barnes v. City of Cincinnati",
+    },
+    {
+      insert: ", 401 F.3d 729 (6th Cir. 2005)",
+    },
+    {
+      attributes: {
+        list: "ordered",
       },
-      {
-        insert: ", 401 F.3d 729 (6th Cir. 2005)",
-      },
-      {
-        attributes: {
-          list: "ordered",
-        },
-        insert: "\n",
-      },
-    ])
-  ).toEqual(
-    "1. ~~Glenn v. Brumby~~, 663 F.3d 1312 (11th Cir. 2011)\n2. ~~Barnes v. City of Cincinnati~~, 401 F.3d 729 (6th Cir. 2005)\n"
+      insert: "\n",
+    },
+  ]);
+  console.log(resultRender);
+  expect(resultRender).toEqual(
+    "~~Glenn v. Brumby~~, 663 F.3d 1312 (11th Cir. 2011)\n"+
+    "~~Barnes v. City of Cincinnati~~, 401 F.3d 729 (6th Cir. 2005)\n"
   );
 });
 
@@ -299,7 +300,7 @@ test('render a code-block', function() {
     {"insert":"Simple text\n"}
   ]);
   expect(resultRender)
-  .toEqual("**Strong**\n```\ncodeLine1\ncodeLine2\n```Simple text\n");
+  .toEqual("**Strong**\n```\ncodeLine1\ncodeLine2\n```\nSimple text\n");
 })
 
 // test('renders a separator block', function() {

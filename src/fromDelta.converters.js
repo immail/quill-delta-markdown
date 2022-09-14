@@ -41,7 +41,7 @@ module.exports = {
     // },
     'code-block': {
       group: function() {
-        return new Node(['```', '```']);
+        return new Node(['```', '```\n']);
       },
       line: function (attrs, group) {
         let indent = "";
@@ -89,6 +89,8 @@ module.exports = {
           group.indentCounts[attrs.indent] =
             group.indentCounts[attrs.indent] || 0;
           let count = ++group.indentCounts[attrs.indent];
+          console.log('ListFormatter:', {indentSize: indent.length, count});
+          if(indent.length)
           this.open = indent + count + ". " + this.open;
         }
       },
