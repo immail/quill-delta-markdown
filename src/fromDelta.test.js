@@ -111,7 +111,7 @@ test('renders lists with inline formats correctly', function() {
 })
 
 test("renders lists with inline strike correctly", function () {
-  const resultRender = render([
+  const result = render([
     {
       attributes: {
         strike: true,
@@ -143,12 +143,46 @@ test("renders lists with inline strike correctly", function () {
       insert: "\n",
     },
   ]);
-  console.log(resultRender);
-  expect(resultRender).toEqual(
-    "~~Glenn v. Brumby~~, 663 F.3d 1312 (11th Cir. 2011)\n"+
-    "~~Barnes v. City of Cincinnati~~, 401 F.3d 729 (6th Cir. 2005)\n"
+  expect(result).toEqual(
+    "1. ~~Glenn v. Brumby~~, 663 F.3d 1312 (11th Cir. 2011)\n"+
+    "2. ~~Barnes v. City of Cincinnati~~, 401 F.3d 729 (6th Cir. 2005)\n"
   );
 });
+
+test('render simple lists correctly', function() {
+  const result = render([
+    {
+      insert: 'Item 1',
+    },
+    {
+      insert: '\n',
+      attributes: {
+        list: 'ordered',
+      },
+    },
+    {
+      insert: 'Item 2',
+    },
+    {
+      insert: '\n',
+      attributes: {
+        list: 'ordered',
+      },
+    },
+    {
+      insert: 'Item 3',
+    },
+    {
+      insert: '\n',
+      attributes: {
+        list: 'ordered',
+      },
+    }
+  ])
+  expect(result).toEqual(
+    '1. Item 1\n2. Item 2\n3. Item 3\n'
+  )
+})
 
 test('renders adjacent lists correctly', function() {
   expect(
@@ -302,19 +336,3 @@ test('render a code-block', function() {
   expect(resultRender)
   .toEqual("**Strong**\n```\ncodeLine1\ncodeLine2\n```\nSimple text\n");
 })
-
-// test('renders a separator block', function() {
-//   expect(
-//     render([
-//       {
-//         insert: 'Before\n',
-//       },
-//       {
-//         insert: {thematic_break: true},
-//       },
-//       {
-//         insert: 'After\n',
-//       },
-//     ])
-//   ).toEqual('Before' + '\n' + '\n' + '---' + '\n' + 'After' + '\n')
-// });
